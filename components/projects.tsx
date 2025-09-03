@@ -22,7 +22,7 @@ export default function Projects() {
       id: 1,
       title: "Devsbook",
       image: "/img/devsbook.png",
-      description: "Rede social completa desenvolvida com PHP e MySQL. Possui sistema de autenticação, CRUD completo, upload de imagens, configurações de usuário, comentários e likes em posts. ",
+      description: "Rede social completa desenvolvida com PHP e MySQL. Possui sistema de autenticação, CRUD completo, upload de imagens, configurações de usuário, comentários e likes em posts.",
       technologies: ["HTML/CSS", "JavaScript", "PHP", "MySQL"],
       githubUrl: "https://github.com/J-Breno/php_curso/tree/main/projeto/devsbook",
       liveUrl: "https://jbrenojdev.com.br/app/public/login.php",
@@ -49,7 +49,7 @@ export default function Projects() {
       githubUrl: "https://github.com/J-Breno/nextjs/tree/main/01-ignite-shop",
       liveUrl: "https://shopbrenodev.netlify.app/",
       bgPosition: "center",
-      category: "Fullstack"
+      category: "Frontend"
     }
   ];
 
@@ -157,10 +157,10 @@ export default function Projects() {
               </DialogTrigger>
 
               {selectedProject && (
-                <DialogContent className="max-w-4xl bg-gray-900 border border-gray-700/50 rounded-2xl text-white overflow-hidden backdrop-blur-sm">
-                  <DialogHeader className="flex flex-row items-center justify-between p-6 border-b border-gray-700/30">
-                    <div>
-                      <DialogTitle className="text-2xl font-bold text-white">
+                <DialogContent className="max-w-[95vw] md:max-w-3xl lg:max-w-4xl max-h-[90vh] overflow-y-auto bg-gray-900 border border-gray-700/50 rounded-2xl text-white backdrop-blur-sm">
+                  <DialogHeader className="sticky top-0 z-10 bg-gray-900 flex flex-row items-center justify-between p-4 md:p-6 border-b border-gray-700/30">
+                    <div className="flex-1 min-w-0">
+                      <DialogTitle className="text-xl md:text-2xl font-bold text-white truncate">
                         {selectedProject.title}
                       </DialogTitle>
                       <span className="text-[#FFAE00] text-sm font-medium">
@@ -169,37 +169,37 @@ export default function Projects() {
                     </div>
                     <button 
                       onClick={closeProjectDialog}
-                      className="p-2 rounded-lg hover:bg-gray-800 transition-colors duration-300"
+                      className="ml-4 p-2 rounded-lg hover:bg-gray-800 transition-colors duration-300 flex-shrink-0"
+                      aria-label="Fechar modal"
                     >
-                      <XIcon className="w-5 h-5" />
+                      <XIcon className="w-5 h-5 md:w-6 md:h-6" />
                     </button>
                   </DialogHeader>
 
-                  <div className="p-6">
-                    <div className="relative rounded-xl overflow-hidden mb-6">
+                  <div className="p-4 md:p-6">
+                    <div className="relative rounded-xl overflow-hidden mb-4 md:mb-6">
                       <img 
                         src={selectedProject.image} 
                         alt={selectedProject.title} 
-                        className="w-full h-64 object-cover"
+                        className="w-full h-48 md:h-56 object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     </div>
                     
-                    {/* Descrição */}
-                    <div className="mb-6">
-                      <h4 className="text-lg font-semibold text-white mb-3">Sobre o projeto</h4>
-                      <p className="text-gray-300 leading-relaxed">
+                    <div className="mb-4 md:mb-6">
+                      <h4 className="text-lg font-semibold text-white mb-2 md:mb-3">Sobre o projeto</h4>
+                      <p className="text-gray-300 leading-relaxed text-sm md:text-base">
                         {selectedProject.description}
                       </p>
                     </div>
 
-                    <div className="mb-6">
-                      <h4 className="text-lg font-semibold text-white mb-3">Tecnologias utilizadas</h4>
-                      <div className="flex flex-wrap gap-3">
+                    <div className="mb-4 md:mb-6">
+                      <h4 className="text-lg font-semibold text-white mb-2 md:mb-3">Tecnologias utilizadas</h4>
+                      <div className="flex flex-wrap gap-2 md:gap-3">
                         {selectedProject.technologies.map((tech, index) => (
                           <span 
                             key={index}
-                            className="px-4 py-2 bg-gray-800/50 text-gray-300 rounded-lg text-sm border border-gray-700/30 hover:border-[#FFAE00]/30 transition-all duration-300"
+                            className="px-3 py-1 md:px-4 md:py-2 bg-gray-800/50 text-gray-300 rounded-lg text-xs md:text-sm border border-gray-700/30 hover:border-[#FFAE00]/30 transition-all duration-300"
                           >
                             {tech}
                           </span>
@@ -207,27 +207,27 @@ export default function Projects() {
                       </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                       <a
                         href={selectedProject.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 flex-1 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/30 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 group"
+                        className="flex items-center justify-center gap-2 flex-1 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/30 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 hover:scale-105 group text-sm md:text-base"
                       >
-                        <GithubIcon className="w-5 h-5" />
+                        <GithubIcon className="w-4 h-4 md:w-5 md:h-5" />
                         Ver código
-                        <ArrowRightIcon className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                        <ArrowRightIcon className="w-3 h-3 md:w-4 md:h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                       </a>
 
                       <a
                         href={selectedProject.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 flex-1 bg-gradient-to-r from-[#FFAE00] to-orange-500 hover:from-orange-400 hover:to-[#FFAE00] text-black font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 group"
+                        className="flex items-center justify-center gap-2 flex-1 bg-gradient-to-r from-[#FFAE00] to-orange-500 hover:from-orange-400 hover:to-[#FFAE00] text-black font-semibold px-4 py-2 md:px-6 md:py-3 rounded-lg transition-all duration-300 hover:scale-105 group text-sm md:text-base"
                       >
-                        <ExternalLinkIcon className="w-5 h-5" />
+                        <ExternalLinkIcon className="w-4 h-4 md:w-5 md:h-5" />
                         Ver aplicação
-                        <ArrowRightIcon className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                        <ArrowRightIcon className="w-3 h-3 md:w-4 md:h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                       </a>
                     </div>
                   </div>
