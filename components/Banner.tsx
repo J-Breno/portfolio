@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { FaCode, FaRocket, FaMedal, FaArrowDown } from "react-icons/fa";
+import { FaCode, FaRocket, FaMedal } from "react-icons/fa";
 
 export function Banner() {
   const [isClient, setIsClient] = useState(false);
@@ -16,11 +16,9 @@ export function Banner() {
 
   useEffect(() => {
     setIsClient(true);
-    // Verificar tema atual
     const isDark = document.documentElement.classList.contains('dark');
     setIsDarkMode(isDark);
     
-    // Observar mudanças no tema
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.attributeName === 'class') {
@@ -38,7 +36,6 @@ export function Banner() {
     return () => observer.disconnect();
   }, []);
 
-  // Variantes de animação - CORRIGIDAS
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -57,7 +54,7 @@ export function Banner() {
       opacity: 1,
       transition: {
         duration: 0.7,
-        ease: [0.25, 0.46, 0.45, 0.94] // Valor numérico equivalente a "easeOut"
+        ease: [0.25, 0.46, 0.45, 0.94] 
       }
     }
   };
@@ -70,14 +67,13 @@ export function Banner() {
       rotate: 0,
       transition: {
         duration: 0.7,
-        ease: [0.25, 0.46, 0.45, 0.94] // Valor numérico equivalente a "easeOut"
+        ease: [0.25, 0.46, 0.45, 0.94] 
       }
     }
   };
 
   return (
     <section id="home" className="relative min-h-screen w-full overflow-hidden flex items-center">
-      {/* Fundo com gradiente melhorado para tema claro */}
       <div className="absolute inset-0">
         <div className={`absolute inset-0 ${
           isDarkMode 
@@ -85,20 +81,17 @@ export function Banner() {
             : "bg-gradient-to-br from-blue-50 via-white to-blue-100"
         }`}></div>
         
-        {/* Padrão de fundo sutil */}
         <div className={`absolute inset-0 opacity-20 ${
           isDarkMode 
             ? "bg-[radial-gradient(circle_at_1px_1px,_#FFAE00_1px,_transparent_0)] bg-[length:20px_20px]"
             : "bg-[radial-gradient(circle_at_1px_1px,_#3b82f6_1px,_transparent_0)] bg-[length:20px_20px]"
         }`}></div>
         
-        {/* Efeito de brilho central */}
         <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 rounded-full blur-3xl opacity-20 ${
           isDarkMode ? "bg-[#FFAE00]" : "bg-blue-400"
         }`}></div>
       </div>
 
-      {/* Partículas animadas */}
       {isClient && (
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(30)].map((_, i) => (
@@ -139,7 +132,6 @@ export function Banner() {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {/* Conteúdo de texto */}
           <div className="text-center lg:text-left space-y-6 order-2 lg:order-1">
             <motion.div variants={itemVariants}>
               <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold ${
@@ -175,7 +167,6 @@ export function Banner() {
               </p>
             </motion.div>
 
-            {/* Estatísticas */}
             <motion.div 
               className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8"
               variants={itemVariants}
@@ -223,7 +214,6 @@ export function Banner() {
               </div>
             </motion.div>
 
-            {/* Botões */}
             <motion.div 
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               variants={itemVariants}
@@ -264,13 +254,11 @@ export function Banner() {
             </motion.div>
           </div>
 
-          {/* Imagem de perfil */}
           <motion.div 
             className="relative flex justify-center order-1 lg:order-2"
             variants={imageVariants}
           >
             <div className="relative">
-              {/* Efeito de brilho atrás da imagem */}
               <motion.div 
                 className="absolute -inset-6 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full opacity-20 blur-xl"
                 animate={{ 
@@ -280,7 +268,6 @@ export function Banner() {
                 transition={{ duration: 4, repeat: Infinity }}
               />
               
-              {/* Container da imagem */}
               <motion.div 
                 className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl group"
                 whileHover={{ 
@@ -297,7 +284,6 @@ export function Banner() {
                   priority
                 />
                 
-                {/* Overlay sutil */}
                 <div className={`absolute inset-0 ${
                   isDarkMode 
                     ? "bg-gradient-to-t from-black/20 to-transparent" 
@@ -305,7 +291,6 @@ export function Banner() {
                 } opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
               </motion.div>
               
-              {/* Badge "Disponível" */}
               <motion.div 
                 className="absolute -bottom-4 -right-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg flex items-center gap-2"
                 animate={{ 
@@ -318,7 +303,6 @@ export function Banner() {
                 Disponível!
               </motion.div>
 
-              {/* Elementos decorativos flutuantes */}
               <motion.div 
                 className="absolute -top-4 -left-4 w-8 h-8 bg-amber-500 rounded-full shadow-lg"
                 animate={{ 
