@@ -28,7 +28,6 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
-      // Atualizar seção ativa
       const sections = ["home", "serviços", "habilidades", "sobre", "projetos", "contato", "recomendações"];
       const scrollPosition = window.scrollY + 100;
       
@@ -59,7 +58,6 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    // Atualizar posição da linha indicadora
     if (navRef.current && underlineRef.current) {
       const activeElement = navRef.current.querySelector(`[data-id="${activeSection}"]`);
       if (activeElement) {
@@ -79,7 +77,6 @@ export default function Header() {
     document.documentElement.classList.toggle('dark', newDarkMode);
     localStorage.setItem('theme', newDarkMode ? 'dark' : 'light');
     
-    // Efeito de confetti ao alternar o tema
     if (newDarkMode) {
       createDarkModeTransition();
     }
@@ -109,7 +106,6 @@ export default function Header() {
       confetti.style.opacity = '0';
       container.appendChild(confetti);
 
-      // Animação
       const animation = confetti.animate([
         { 
           opacity: 1,
@@ -156,25 +152,20 @@ export default function Header() {
     }
   };
 
-  // Função para determinar a cor do texto baseado no estado
   const getTextColorClass = (isButton = false) => {
     if (isButton) {
-      // Para botões, mantenha as cores originais
       return "";
     }
     
     if (!isScrolled) {
-      // No topo - texto branco
       return "text-white";
     } else {
-      // Com scroll - texto preto no light mode, branco no dark mode
       return isDarkMode ? "text-white" : "text-black";
     }
   };
 
   return (
     <>
-      {/* Efeito de cursor personalizado */}
       <div 
         className="fixed hidden md:block pointer-events-none z-50 transition-all duration-100 ease-out"
         style={{
@@ -214,13 +205,11 @@ export default function Header() {
                 <span className="mx-1 group-hover:scale-105 transition-transform duration-300">JB</span>
                 <span className="text-[#FFAE00] group-hover:scale-110 transition-transform duration-300">/&gt;</span>
                 
-                {/* Efeito de brilho ao redor do logo */}
                 <span className="absolute -inset-2 bg-[#FFAE00]/10 rounded-full opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300" />
               </a>
             </div>
 
             <nav ref={navRef} className="hidden md:flex items-center space-x-1 relative">
-              {/* Linha indicadora - corrigida */}
               <div
                 ref={underlineRef}
                 className="absolute -bottom-1 h-0.5 bg-gradient-to-r from-[#FFAE00] to-orange-500 transition-all duration-300 opacity-0"
@@ -244,10 +233,8 @@ export default function Header() {
                   >
                     {item.label}
                     
-                    {/* Efeito de fundo ao passar o mouse */}
                     <span className="absolute inset-0 bg-gradient-to-r from-[#FFAE00]/10 to-orange-500/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                     
-                    {/* Efeito de partículas ao passar o mouse */}
                     <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       {[...Array(3)].map((_, i) => (
                         <span
@@ -278,10 +265,8 @@ export default function Header() {
                   <MoonIcon className="w-5 h-5" />
                 )}
                 
-                {/* Efeito de brilho no botão de tema */}
                 <span className="absolute inset-0 rounded-lg bg-[#FFAE00] opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
                 
-                {/* Efeito de sparkle */}
                 <SparklesIcon className="absolute -top-1 -right-1 w-3 h-3 text-[#FFAE00] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </button>
 
@@ -294,10 +279,8 @@ export default function Header() {
                   <DownloadIcon className="w-4 h-4" />
                   <span className="relative z-10">CURRÍCULO</span>
                   
-                  {/* Efeito de brilho animado */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   
-                  {/* Efeito de partículas no hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     {[...Array(5)].map((_, i) => (
                       <div

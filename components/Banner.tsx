@@ -1,18 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { useState, useEffect, useRef } from "react";
 import { FaCode, FaRocket, FaMedal } from "react-icons/fa";
 
 export function Banner() {
   const [isClient, setIsClient] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const bannerRef = useRef(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -36,42 +31,6 @@ export function Banner() {
     return () => observer.disconnect();
   }, []);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        ease: [0.25, 0.46, 0.45, 0.94] 
-      }
-    }
-  };
-
-  const imageVariants = {
-    hidden: { scale: 0.8, opacity: 0, rotate: -5 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      rotate: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.25, 0.46, 0.45, 0.94] 
-      }
-    }
-  };
-
   return (
     <section id="home" className="relative min-h-screen w-full overflow-hidden flex items-center">
       <div className="absolute inset-0">
@@ -87,7 +46,7 @@ export function Banner() {
             : "bg-[radial-gradient(circle_at_1px_1px,_#3b82f6_1px,_transparent_0)] bg-[length:20px_20px]"
         }`}></div>
         
-        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 rounded-full blur-3xl opacity-20 ${
+        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 rounded-full blur-3xl opacity-20 animate-pulse ${
           isDarkMode ? "bg-[#FFAE00]" : "bg-blue-400"
         }`}></div>
       </div>
@@ -95,67 +54,48 @@ export function Banner() {
       {isClient && (
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(30)].map((_, i) => (
-            <motion.div
+            <div
               key={i}
-              className={`absolute w-1 h-1 rounded-full ${
+              className={`absolute w-1 h-1 rounded-full animate-float ${
                 isDarkMode ? "bg-[#FFAE00]" : "bg-blue-500"
               }`}
-              initial={{ 
-                y: Math.random() * 100,
-                x: Math.random() * 100,
-                opacity: 0 
-              }}
-              animate={{ 
-                y: [null, (Math.random() * 100) - 50],
-                x: [null, (Math.random() * 100) - 50],
-                opacity: [0, 0.8, 0],
-              }}
-              transition={{
-                duration: 4 + Math.random() * 3,
-                repeat: Infinity,
-                delay: i * 0.2,
-                ease: "easeInOut"
-              }}
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
+                animationDelay: `${i * 0.2}s`,
+                animationDuration: `${4 + Math.random() * 3}s`,
               }}
             />
           ))}
         </div>
       )}
 
-      <div ref={ref} className="relative z-10 container mx-auto px-4 py-16">
-        <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full max-w-6xl mx-auto"
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
+      <div ref={bannerRef} className="relative z-10 container mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full max-w-6xl mx-auto animate-fadeIn">
           <div className="text-center lg:text-left space-y-6 order-2 lg:order-1">
-            <motion.div variants={itemVariants}>
+            <div className="animate-slideUp opacity-0 [animation-fill-mode:forwards]">
               <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold ${
                 isDarkMode ? "text-white" : "text-gray-900"
               } mb-2`}>
                 Transformando
               </h1>
-            </motion.div>
+            </div>
             
-            <motion.div variants={itemVariants}>
+            <div className="animate-slideUp opacity-0 [animation-fill-mode:forwards] [animation-delay:0.2s]">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent mb-2">
                 Ideias em Código
               </h1>
-            </motion.div>
+            </div>
             
-            <motion.div variants={itemVariants}>
+            <div className="animate-slideUp opacity-0 [animation-fill-mode:forwards] [animation-delay:0.4s]">
               <h2 className={`text-xl md:text-2xl ${
                 isDarkMode ? "text-gray-300" : "text-gray-600"
               } font-light mb-6`}>
                 João <span className={isDarkMode ? "text-white font-medium" : "text-gray-900 font-medium"}>Breno</span>
               </h2>
-            </motion.div>
+            </div>
 
-            <motion.div variants={itemVariants}>
+            <div className="animate-slideUp opacity-0 [animation-fill-mode:forwards] [animation-delay:0.6s]">
               <p className={`text-lg ${
                 isDarkMode ? "text-gray-400" : "text-gray-600"
               } mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0`}>
@@ -165,11 +105,10 @@ export function Banner() {
                 </span>
                 . Soluções com foco em performance, escalabilidade e resultados mensuráveis.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div 
-              className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8"
-              variants={itemVariants}
+            <div 
+              className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8 animate-slideUp opacity-0 [animation-fill-mode:forwards] [animation-delay:0.8s]"
             >
               <div className={`flex items-center gap-3 ${
                 isDarkMode ? "bg-white/10" : "bg-black/5"
@@ -212,70 +151,42 @@ export function Banner() {
                   <div className={isDarkMode ? "text-gray-400 text-sm" : "text-gray-600 text-sm"}>Anos Exp</div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-              variants={itemVariants}
+            <div 
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slideUp opacity-0 [animation-fill-mode:forwards] [animation-delay:1s]"
             >
-              <motion.a
+              <a
                 href="#projects"
-                className="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-amber-500/25 relative overflow-hidden group flex items-center justify-center"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 10px 25px -5px rgba(245, 158, 11, 0.3)"
-                }}
-                whileTap={{ scale: 0.98 }}
+                className="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-amber-500/25 relative overflow-hidden group flex items-center justify-center transition-all duration-300 hover:scale-105"
               >
                 <span className="relative z-10">Ver Projetos</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.a>
+              </a>
               
-              <motion.a
+              <a
                 href="#contact"
-                className={`px-6 py-3 border font-semibold rounded-xl group relative overflow-hidden flex items-center justify-center ${
+                className={`px-6 py-3 border font-semibold rounded-xl group relative overflow-hidden flex items-center justify-center transition-all duration-300 hover:scale-105 ${
                   isDarkMode 
                     ? "border-amber-500/30 text-amber-500 hover:bg-amber-500 hover:text-white" 
                     : "border-amber-500 text-amber-600 hover:bg-amber-500 hover:text-white"
                 }`}
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: isDarkMode 
-                    ? "0 10px 25px -5px rgba(245, 158, 11, 0.2)" 
-                    : "0 10px 25px -5px rgba(245, 158, 11, 0.3)"
-                }}
-                whileTap={{ scale: 0.98 }}
               >
                 <span className="relative z-10">Entrar em Contato</span>
                 <div className={`absolute inset-0 ${
                   isDarkMode ? "bg-amber-500" : "bg-amber-500"
                 } opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`} />
-              </motion.a>
-            </motion.div>
+              </a>
+            </div>
           </div>
 
-          <motion.div 
-            className="relative flex justify-center order-1 lg:order-2"
-            variants={imageVariants}
+          <div 
+            className="relative flex justify-center order-1 lg:order-2 animate-scaleIn opacity-0 [animation-fill-mode:forwards] [animation-delay:0.5s]"
           >
             <div className="relative">
-              <motion.div 
-                className="absolute -inset-6 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full opacity-20 blur-xl"
-                animate={{ 
-                  opacity: [0.1, 0.2, 0.1],
-                  rotate: [0, 5, 0]
-                }}
-                transition={{ duration: 4, repeat: Infinity }}
-              />
+              <div className="absolute -inset-6 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full opacity-20 blur-xl animate-pulse-slow" />
               
-              <motion.div 
-                className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl group"
-                whileHover={{ 
-                  scale: 1.03,
-                  rotate: 2
-                }}
-                transition={{ duration: 0.5 }}
-              >
+              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl group transition-transform duration-500 hover:scale-103">
                 <Image
                   src="https://github.com/j-breno.png"
                   alt="João Breno - Fullstack Developer"
@@ -289,82 +200,42 @@ export function Banner() {
                     ? "bg-gradient-to-t from-black/20 to-transparent" 
                     : "bg-gradient-to-t from-white/20 to-transparent"
                 } opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-              </motion.div>
+              </div>
               
-              <motion.div 
-                className="absolute -bottom-4 -right-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg flex items-center gap-2"
-                animate={{ 
-                  y: [0, -5, 0],
-                  scale: [1, 1.05, 1]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
+              <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg flex items-center gap-2 animate-bounce-slow">
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
                 Disponível!
-              </motion.div>
+              </div>
 
-              <motion.div 
-                className="absolute -top-4 -left-4 w-8 h-8 bg-amber-500 rounded-full shadow-lg"
-                animate={{ 
-                  scale: [1, 1.5, 1], 
-                  opacity: [0.6, 0, 0.6],
-                  rotate: [0, 180, 360]
-                }}
-                transition={{ duration: 4, repeat: Infinity }}
-              />
+              <div className="absolute -top-4 -left-4 w-8 h-8 bg-amber-500 rounded-full shadow-lg animate-ping-slow" />
               
-              <motion.div 
-                className="absolute top-8 -right-4 w-6 h-6 bg-orange-500 rounded-full shadow-lg"
-                animate={{ 
-                  scale: [1, 1.3, 1], 
-                  opacity: [0.4, 0.2, 0.4],
-                  rotate: [0, -180, -360]
-                }}
-                transition={{ duration: 5, repeat: Infinity, delay: 0.5 }}
-              />
+              <div className="absolute top-8 -right-4 w-6 h-6 bg-orange-500 rounded-full shadow-lg animate-ping-slower" />
               
-              <motion.div 
-                className="absolute bottom-12 -left-4 w-5 h-5 bg-amber-400 rounded-full shadow-lg"
-                animate={{ 
-                  scale: [1, 1.4, 1], 
-                  opacity: [0.3, 0, 0.3],
-                  rotate: [0, 90, 180, 270, 360]
-                }}
-                transition={{ duration: 6, repeat: Infinity, delay: 1 }}
-              />
+              <div className="absolute bottom-12 -left-4 w-5 h-5 bg-amber-400 rounded-full shadow-lg animate-ping-slowest" />
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
-      <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block"  
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        >
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block animate-bounce">
         <a 
-            href="#services" 
-            className={`flex flex-col items-center ${
+          href="#services" 
+          className={`flex flex-col items-center ${
             isDarkMode ? "text-amber-500" : "text-amber-600"
-            } hover:${
+          } hover:${
             isDarkMode ? "text-amber-400" : "text-amber-700"
-            } transition-colors duration-300`}
+          } transition-colors duration-300`}
         >
-            <span className="text-sm mb-2">Scroll Down</span>
-            <div className={`w-6 h-10 border-2 ${
+          <span className="text-sm mb-2">Scroll Down</span>
+          <div className={`w-6 h-10 border-2 ${
             isDarkMode ? "border-amber-500/50" : "border-amber-600/50"
-            } rounded-full flex justify-center`}>
-            <motion.div 
-                className={`w-1 h-3 ${
-                isDarkMode ? "bg-amber-500" : "bg-amber-600"
-                } rounded-full mt-2`}
-                animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-            />
-            </div>
+          } rounded-full flex justify-center`}>
+            <div className={`w-1 h-3 ${
+              isDarkMode ? "bg-amber-500" : "bg-amber-600"
+            } rounded-full mt-2 animate-scroll`} />
+          </div>
         </a>
-        </motion.div>
-
+      </div>
     </section>
   );
 }
