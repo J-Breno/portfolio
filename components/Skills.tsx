@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileHtmlIcon, FileCssIcon, FileJsIcon, FileTsIcon, WindIcon, AtomIcon, DatabaseIcon,  CodeIcon } from "@phosphor-icons/react";
+import {  FileCssIcon, FileJsIcon, FileTsIcon, WindIcon, AtomIcon,  CodeIcon, FileDocIcon, CubeFocusIcon } from "@phosphor-icons/react";
 
 export default function Skills() {
   const [touchedIndex, setTouchedIndex] = useState<number | null>(null);
@@ -10,14 +10,14 @@ export default function Skills() {
   };
 
   const skills = [
-    { name: "HTML", icon: FileHtmlIcon, color: "#dc2626", bgColor: "bg-red-600/10" },
     { name: "CSS", icon: FileCssIcon, color: "#2563eb", bgColor: "bg-blue-600/10" },
-    { name: "JavaScript", icon: FileJsIcon, color: "#facc15", bgColor: "bg-yellow-400/10" },
-    { name: "TypeScript", icon: FileTsIcon, color: "#60a5fa", bgColor: "bg-blue-400/10" },
     { name: "Tailwind", icon: WindIcon, color: "#38bdf8", bgColor: "bg-sky-400/10" },
+    { name: "jQuery", icon: FileJsIcon, color: "#facc15", bgColor: "bg-yellow-400/10" },
+    { name: "TypeScript", icon: FileTsIcon, color: "#60a5fa", bgColor: "bg-blue-400/10" },
     { name: "React / Next", icon: AtomIcon, color: "#9333ea", bgColor: "bg-purple-600/10" },
-    { name: "Node / Nest", icon: DatabaseIcon, color: "#22c55e", bgColor: "bg-green-500/10" },
+    { name: "WordPress", icon: FileDocIcon, color: "#22c55e", bgColor: "bg-green-500/10" },
     { name: "PHP", icon: CodeIcon, color: "#a855f7", bgColor: "bg-purple-500/10" },
+    { name: "LARAVEL", icon: CubeFocusIcon, color: "#dc2626", bgColor: "bg-red-600/10" },
   ];
 
   return (

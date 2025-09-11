@@ -3,7 +3,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Porfilio João Breno",
+  title: "Portfilio João Breno",
   description: "Porfilio João Breno",
 };
 
