@@ -11,9 +11,19 @@ import { ChevronUpIcon } from "lucide-react";
 export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true); // Estado para controlar o tema
 
   useEffect(() => {
     setIsClient(true);
+    
+    // Verificar preferência salva no localStorage
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Definir tema inicial
+    const initialDarkMode = savedTheme ? savedTheme === 'dark' : prefersDark;
+    setIsDarkMode(initialDarkMode);
+    document.documentElement.classList.toggle('dark', initialDarkMode);
     
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500);
@@ -29,13 +39,18 @@ export default function Home() {
 
   return (
     <>
-      <div className="w-full min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <div className={`w-full min-h-screen ${isDarkMode 
+        ? 'bg-gradient-to-br from-gray-900 via-black to-gray-900' 
+        : 'bg-gradient-to-br from-blue-50 via-white to-gray-100'}`}>
+        
         {isClient && (
           <div className="fixed inset-0 overflow-hidden pointer-events-none">
             {[...Array(20)].map((_, i) => (
               <div
                 key={i}
-                className="absolute w-1 h-1 bg-[#FFAE00]/30 rounded-full animate-float"
+                className={`absolute w-1 h-1 rounded-full animate-float ${
+                  isDarkMode ? 'bg-[#FFAE00]/30' : 'bg-[#FFAE00]/50'
+                }`}
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
@@ -45,21 +60,25 @@ export default function Home() {
               />
             ))}
             
-            <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-[#FFAE00]/10 to-transparent opacity-20"></div>
-            <div className="absolute bottom-0 right-0 w-full h-1/3 bg-gradient-to-t from-[#FFAE00]/10 to-transparent opacity-20"></div>
+            <div className={`absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b ${
+              isDarkMode ? 'from-[#FFAE00]/10' : 'from-[#FFAE00]/5'
+            } to-transparent opacity-20`}></div>
+            <div className={`absolute bottom-0 right-0 w-full h-1/3 bg-gradient-to-t ${
+              isDarkMode ? 'from-[#FFAE00]/10' : 'from-[#FFAE00]/5'
+            } to-transparent opacity-20`}></div>
           </div>
         )}
 
-        <Header />
+        <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
 
         <main className="relative z-10 w-full">
-          <Banner />
+          <Banner isDarkMode={isDarkMode} />
           
           <div className="space-y-0">
-            <About />
-            <Skills />
-            <Projects />
-            <Contact />
+            <About isDarkMode={isDarkMode} />
+            <Skills  />
+            <Projects  />
+            <Contact  />
           </div>
         </main>
 
@@ -74,12 +93,18 @@ export default function Home() {
           </button>
         )}
 
-        <footer className="relative z-10 py-12 text-center text-gray-400 bg-gray-900/80 backdrop-blur-md border-t border-gray-700/30 mt-20">
+        <footer className={`relative z-10 py-12 text-center backdrop-blur-md border-t mt-20 ${
+          isDarkMode 
+            ? 'text-gray-400 bg-gray-900/80 border-gray-700/30' 
+            : 'text-gray-600 bg-white/80 border-gray-300/50'
+        }`}>
           <div className="container mx-auto px-4">
             <p className="text-sm">
               © {new Date().getFullYear()} João Breno. Desenvolvido com TypeScript, Next.js e Tailwind CSS.
             </p>
-            <p className="text-xs mt-2 text-gray-500">
+            <p className={`text-xs mt-2 ${
+              isDarkMode ? 'text-gray-500' : 'text-gray-400'
+            }`}>
               Todos os direitos reservados.
             </p>
           </div>

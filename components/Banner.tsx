@@ -4,31 +4,16 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { FaCode, FaRocket, FaMedal } from "react-icons/fa";
 
-export function Banner() {
+interface BannerProps {
+  isDarkMode: boolean;
+}
+
+export function Banner({ isDarkMode }: BannerProps) {
   const [isClient, setIsClient] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const bannerRef = useRef(null);
 
   useEffect(() => {
     setIsClient(true);
-    const isDark = document.documentElement.classList.contains('dark');
-    setIsDarkMode(isDark);
-    
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          const isNowDark = document.documentElement.classList.contains('dark');
-          setIsDarkMode(isNowDark);
-        }
-      });
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    return () => observer.disconnect();
   }, []);
 
   return (
@@ -157,7 +142,7 @@ export function Banner() {
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slideUp opacity-0 [animation-fill-mode:forwards] [animation-delay:1s]"
             >
               <a
-                href="#projects"
+                href="#projetos"
                 className="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-amber-500/25 relative overflow-hidden group flex items-center justify-center transition-all duration-300 hover:scale-105"
               >
                 <span className="relative z-10">Ver Projetos</span>
@@ -165,7 +150,7 @@ export function Banner() {
               </a>
               
               <a
-                href="#contact"
+                href="#contato"
                 className={`px-6 py-3 border font-semibold rounded-xl group relative overflow-hidden flex items-center justify-center transition-all duration-300 hover:scale-105 ${
                   isDarkMode 
                     ? "border-amber-500/30 text-amber-500 hover:bg-amber-500 hover:text-white" 
@@ -219,7 +204,7 @@ export function Banner() {
 
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block animate-bounce">
         <a 
-          href="#services" 
+          href="#serviços" 
           className={`flex flex-col items-center ${
             isDarkMode ? "text-amber-500" : "text-amber-600"
           } hover:${

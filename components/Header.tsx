@@ -1,30 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { MenuIcon, XIcon, DownloadIcon, SunIcon, MoonIcon, SparklesIcon } from "lucide-react";
 
-export default function Header() {
+interface HeaderProps {
+  isDarkMode: boolean;
+  setIsDarkMode: (isDarkMode: boolean) => void;
+}
+
+export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const underlineRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === 'dark');
-      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-    } else {
-      setIsDarkMode(prefersDark);
-      if (prefersDark) {
-        document.documentElement.classList.add('dark');
-      }
-    }
-
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
@@ -158,7 +149,7 @@ export default function Header() {
     }
     
     if (!isScrolled) {
-      return "text-white";
+      return isDarkMode ? "text-white" : "text-black";
     } else {
       return isDarkMode ? "text-white" : "text-black";
     }
