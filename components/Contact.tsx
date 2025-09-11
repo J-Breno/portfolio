@@ -45,7 +45,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="w-full py-20 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+    <section id="contato" className="w-full py-20 bg-gradient-to-br from-gray-900 via-black to-gray-900">
       <div className="flex justify-center mb-16">
         <div className="relative">
           <h2 className="text-5xl font-bold text-white text-center relative z-10">

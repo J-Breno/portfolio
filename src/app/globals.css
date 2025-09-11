@@ -3,7 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Variáveis de cores e fontes */
 :root {
   --font-geist-sans: 'Geist', sans-serif;
   --font-geist-mono: 'Geist Mono', monospace;
@@ -124,4 +123,23 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Adicione ao seu global.css */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+.dark .bg-gray-900\/95 {
+  background-color: rgba(17, 24, 39, 0.95);
+}
+
+.dark .border-gray-700\/30 {
+  border-color: rgba(55, 65, 81, 0.3);
 }

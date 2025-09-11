@@ -77,7 +77,7 @@ export default function Home() {
         <footer className="relative z-10 py-12 text-center text-gray-400 bg-gray-900/80 backdrop-blur-md border-t border-gray-700/30 mt-20">
           <div className="container mx-auto px-4">
             <p className="text-sm">
-              © {new Date().getFullYear()} João Breno. Desenvolvido com React, Next.js e Tailwind CSS.
+              © {new Date().getFullYear()} João Breno. Desenvolvido com TypeScript, Next.js e Tailwind CSS.
             </p>
             <p className="text-xs mt-2 text-gray-500">
               Todos os direitos reservados.

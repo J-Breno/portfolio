@@ -21,7 +21,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="w-full py-12 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+    <section id="habilidades" className="w-full py-12 bg-gradient-to-br from-gray-900 via-black to-gray-900">
       <div className="container mx-auto px-4">
         {/* Header com efeito mais moderno */}
         <div className="flex items-center justify-center mb-12">

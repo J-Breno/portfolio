@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function About() {
   return (
-    <section id="about" className="w-full py-16 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+    <section id="sobre" className="w-full py-16 bg-gradient-to-br from-gray-900 via-black to-gray-900">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="flex justify-center mb-12">
           <div className="relative">

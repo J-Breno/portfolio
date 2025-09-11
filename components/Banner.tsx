@@ -11,7 +11,7 @@ export function Banner() {
     return (
         <section className="relative min-h-screen w-full overflow-hidden">
             <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-[url('/img/banner1.jpg')] bg-cover bg-left bg-no-repeat scale-110"></div>
+                <div className="absolute inset-0 scale-110"></div>
                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/60 to-black/90"></div>
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/50 to-black"></div>
             </div>
