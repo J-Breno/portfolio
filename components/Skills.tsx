@@ -15,7 +15,7 @@ export default function Skills() {
     { name: "jQuery", icon: FileJsIcon, color: "#facc15", bgColor: "bg-yellow-400/10" },
     { name: "TypeScript", icon: FileTsIcon, color: "#60a5fa", bgColor: "bg-blue-400/10" },
     { name: "React / Next", icon: AtomIcon, color: "#9333ea", bgColor: "bg-purple-600/10" },
-    { name: "WordPress", icon: FileDocIcon, color: "#22c55e", bgColor: "bg-green-500/10" },
+    { name: "WordPress", icon: FileDocIcon, color: "#00ffe1", bgColor: "bg-[#00ff91]/10" },
     { name: "PHP", icon: CodeIcon, color: "#a855f7", bgColor: "bg-purple-500/10" },
     { name: "LARAVEL", icon: CubeFocusIcon, color: "#dc2626", bgColor: "bg-red-600/10" },
   ];
