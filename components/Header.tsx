@@ -6,22 +6,27 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   useEffect(() => {
-    // Verificar preferência de tema do sistema
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setIsDarkMode(prefersDark);
+    const savedTheme = localStorage.getItem('theme');
     
-    // Aplicar tema inicial
-    if (prefersDark) {
-      document.documentElement.classList.add('dark');
+    if (savedTheme) {
+      setIsDarkMode(savedTheme === 'dark');
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    } else {
+      setIsDarkMode(prefersDark);
+      if (prefersDark) {
+        document.documentElement.classList.add('dark');
+      }
     }
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
       // Atualizar seção ativa
-      const sections = ["serviços", "habilidades", "sobre", "projetos", "contato", "recomendações"];
+      const sections = ["home", "serviços", "habilidades", "sobre", "projetos", "contato", "recomendações"];
       const scrollPosition = window.scrollY + 100;
       
       for (const section of sections) {
@@ -43,11 +48,10 @@ export default function Header() {
   }, []);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark');
-    
-    // Salvar preferência no localStorage
-    localStorage.setItem('theme', !isDarkMode ? 'dark' : 'light');
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    document.documentElement.classList.toggle('dark', newDarkMode);
+    localStorage.setItem('theme', newDarkMode ? 'dark' : 'light');
   };
 
   const navItems = [
@@ -61,6 +65,7 @@ export default function Header() {
 
   const handleNavClick = (itemId: string) => {
     setIsMenuOpen(false);
+    setHoveredItem(null);
     const element = document.getElementById(itemId);
     if (element) {
       element.scrollIntoView({ 
@@ -79,7 +84,6 @@ export default function Header() {
       }`}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Logo com animação */}
             <div className="flex items-center">
               <a 
                 href="#home" 
@@ -88,6 +92,7 @@ export default function Header() {
                   e.preventDefault();
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                   setActiveSection('home');
+                  setHoveredItem(null);
                 }}
               >
                 <span className="text-[#FFAE00] group-hover:scale-110 transition-transform duration-300">&lt;</span>
@@ -96,10 +101,14 @@ export default function Header() {
               </a>
             </div>
 
-            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-6">
               {navItems.map((item) => (
-                <div key={item.id} className="relative group">
+                <div 
+                  key={item.id} 
+                  className="relative group"
+                  onMouseEnter={() => setHoveredItem(item.id)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                >
                   <button
                     onClick={() => handleNavClick(item.id)}
                     className={`font-medium transition-all duration-300 px-3 py-2 rounded-lg ${
@@ -109,14 +118,15 @@ export default function Header() {
                     }`}
                   >
                     {item.label}
-                    <span className={`absolute left-1/2 -bottom-1 h-0.5 w-0 bg-gradient-to-r from-[#FFAE00] to-orange-500 transition-all duration-500 group-hover:w-full group-hover:left-0 ${
-                      activeSection === item.id ? "w-full left-0" : ""
+                    <span className={`absolute left-1/2 -bottom-1 h-0.5 w-0 bg-gradient-to-r from-[#FFAE00] to-orange-500 transition-all duration-300 ${
+                      activeSection === item.id 
+                        ? "w-full left-0" 
+                        : (hoveredItem === item.id ? "w-full left-0" : "")
                     }`}></span>
                   </button>
                 </div>
               ))}
               
-              {/* Botão Toggle Theme */}
               <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300 hover:scale-110"
@@ -129,7 +139,6 @@ export default function Header() {
                 )}
               </button>
 
-              {/* Botão Currículo */}
               <div className="relative group">
                 <a
                   href="/curriculo-joao-breno.pdf"
@@ -143,9 +152,7 @@ export default function Header() {
               </div>
             </nav>
 
-            {/* Mobile Menu Button */}
             <div className="flex items-center gap-3 md:hidden">
-              {/* Botão Toggle Theme Mobile */}
               <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
@@ -168,7 +175,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200/30 dark:border-gray-700/30">
             <div className="container mx-auto px-4 py-4">
@@ -200,10 +206,8 @@ export default function Header() {
         )}
       </header>
 
-      {/* Espaço para o header fixo */}
       <div className="h-16"></div>
 
-      {/* Efeito de partículas sutil no header (opcional) */}
       <style jsx>{`
         @keyframes fadeInDown {
           from {
@@ -229,7 +233,6 @@ export default function Header() {
           animation: float 3s ease-in-out infinite;
         }
         
-        /* Efeito de glow sutil no header */
         header::after {
           content: '';
           position: absolute;
