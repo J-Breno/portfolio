@@ -77,7 +77,7 @@ export default function Home() {
           <div className="space-y-0">
             <About isDarkMode={isDarkMode} />
             <Skills isDarkMode={isDarkMode} />
-            <Projects  />
+            <Projects  isDarkMode={isDarkMode}/>
             <Contact  />
           </div>
         </main>
