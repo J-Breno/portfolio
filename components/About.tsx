@@ -38,7 +38,6 @@ export function About({ isDarkMode }: AboutProps) {
         ? 'bg-gradient-to-br from-gray-900 via-black to-gray-900' 
         : 'bg-gradient-to-br from-blue-50 via-white to-gray-100'}`}
     >
-      {/* Animated background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className={`absolute -top-20 -left-20 w-72 h-72 rounded-full animate-pulse-slow ${
           theme === 'dark' ? 'bg-[#FFAE00]/10' : 'bg-[#FFAE00]/20'}`}></div>
@@ -49,7 +48,6 @@ export function About({ isDarkMode }: AboutProps) {
       </div>
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
-        {/* Section Header with enhanced animation */}
         <div className="flex justify-center mb-16 observe">
           <div className="relative">
             <h2 className={`text-5xl md:text-6xl font-bold text-center relative z-10 opacity-0 translate-y-10 transition-all duration-700 ${
@@ -62,12 +60,10 @@ export function About({ isDarkMode }: AboutProps) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Text Content with enhanced animations */}
           <div className="space-y-10 relative">
             <div className={`absolute -top-6 -left-6 w-24 h-24 rounded-full blur-xl observe ${
               theme === 'dark' ? 'bg-[#FFAE00]/10' : 'bg-[#FFAE00]/20'}`}></div>
             
-            {/* First paragraph */}
             <div className="relative observe opacity-0 translate-y-10 transition-all duration-700 delay-100">
               <div className={`absolute -inset-4 rounded-xl blur-lg opacity-50 ${
                 theme === 'dark' ? 'bg-gradient-to-r from-[#FFAE00]/5 to-transparent' : 'bg-gradient-to-r from-[#FFAE00]/10 to-transparent'}`}></div>
@@ -80,7 +76,6 @@ export function About({ isDarkMode }: AboutProps) {
               </div>
             </div>
 
-            {/* Second paragraph */}
             <div className="relative observe opacity-0 translate-y-10 transition-all duration-700 delay-200">
               <div className={`absolute -inset-4 rounded-xl blur-lg opacity-50 ${
                 theme === 'dark' ? 'bg-gradient-to-r from-transparent to-[#FFAE00]/5' : 'bg-gradient-to-r from-transparent to-[#FFAE00]/10'}`}></div>
@@ -93,7 +88,6 @@ export function About({ isDarkMode }: AboutProps) {
               </div>
             </div>
 
-            {/* Third paragraph */}
             <div className="relative observe opacity-0 translate-y-10 transition-all duration-700 delay-300">
               <div className={`absolute -inset-4 rounded-xl blur-lg opacity-50 ${
                 theme === 'dark' ? 'bg-gradient-to-r from-[#FFAE00]/5 to-transparent' : 'bg-gradient-to-r from-[#FFAE00]/10 to-transparent'}`}></div>
@@ -106,7 +100,6 @@ export function About({ isDarkMode }: AboutProps) {
               </div>
             </div>
 
-            {/* Social links with enhanced animations */}
             <div className="flex gap-5 mt-10 observe opacity-0 translate-y-10 transition-all duration-700 delay-400">
               {[
                 { 
@@ -170,7 +163,6 @@ export function About({ isDarkMode }: AboutProps) {
             </div>
           </div>
 
-          {/* Graphic Element with enhanced animations */}
           <div className="relative hidden lg:block observe opacity-0 transition-all duration-1000">
             <div className="relative">
               <div className={`w-80 h-80 mx-auto rounded-full flex items-center justify-center animate-float-slow ${
@@ -206,7 +198,6 @@ export function About({ isDarkMode }: AboutProps) {
                 </div>
               </div>
               
-              {/* Animated floating elements */}
               <div className={`absolute top-4 left-4 w-8 h-8 rounded-full animate-float-delayed-1 ${
                 theme === 'dark' ? 'bg-[#FFAE00]/20' : 'bg-[#FFAE00]/30'}`}></div>
               <div className={`absolute bottom-8 right-4 w-6 h-6 rounded-full animate-float-delayed-2 ${
@@ -219,7 +210,6 @@ export function About({ isDarkMode }: AboutProps) {
           </div>
         </div>
 
-        {/* Stats section with enhanced animations */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
           {[
             { number: "2+", label: "Anos de Experiência", delay: 100 },
