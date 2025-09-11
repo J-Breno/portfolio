@@ -78,7 +78,7 @@ export default function Home() {
             <About isDarkMode={isDarkMode} />
             <Skills isDarkMode={isDarkMode} />
             <Projects  isDarkMode={isDarkMode}/>
-            <Contact  />
+            <Contact isDarkMode={isDarkMode} />
           </div>
         </main>
 

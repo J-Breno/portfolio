@@ -6,14 +6,49 @@ interface HeaderProps {
   setIsDarkMode: (isDarkMode: boolean) => void;
 }
 
+// Posições pré-definidas para evitar mismatch de hidratação
+const FIXED_POSITIONS = [
+  { top: "67.06%", left: "53.82%" },
+  { top: "70.99%", left: "21.60%" },
+  { top: "59.32%", left: "63.26%" },
+  { top: "52.98%", left: "17.82%" },
+  { top: "73.15%", left: "35.48%" },
+  { top: "37.97%", left: "75.97%" },
+  { top: "59.07%", left: "64.66%" },
+  { top: "23.14%", left: "66.93%" },
+  { top: "60.70%", left: "31.55%" },
+  { top: "31.18%", left: "58.24%" },
+  { top: "25.03%", left: "21.99%" },
+  { top: "27.03%", left: "12.33%" },
+  { top: "75.83%", left: "58.19%" },
+  { top: "35.62%", left: "62.26%" },
+  { top: "35.85%", left: "85.53%" },
+  { top: "51.96%", left: "31.88%" },
+  { top: "26.81%", left: "21.76%" },
+  { top: "79.96%", left: "45.88%" }
+];
+
+const SPARKLE_POSITIONS = [
+  { top: "31.18%", left: "22.97%" },
+  { top: "20.65%", left: "77.27%" },
+  { top: "37.53%", left: "72.65%" },
+  { top: "75.11%", left: "53.56%" },
+  { top: "66.49%", left: "71.36%" }
+];
+
 export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [mounted, setMounted] = useState(false);
   const underlineRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -155,6 +190,24 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
     }
   };
 
+  if (!mounted) {
+    return (
+      <header className="fixed top-0 left-0 right-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/30 dark:border-gray-700/30 shadow-2xl py-1">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-14">
+            <div className="flex items-center">
+              <a href="#home" className="text-2xl font-bold text-black dark:text-white">
+                <span className="text-[#FFAE00]">&lt;</span>
+                <span className="mx-1">JB</span>
+                <span className="text-[#FFAE00]">/&gt;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <>
       <div 
@@ -206,7 +259,7 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
                 className="absolute -bottom-1 h-0.5 bg-gradient-to-r from-[#FFAE00] to-orange-500 transition-all duration-300 opacity-0"
               />
               
-              {navItems.map((item) => (
+              {navItems.map((item, index) => (
                 <div 
                   key={item.id} 
                   className="relative group"
@@ -227,17 +280,20 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
                     <span className="absolute inset-0 bg-gradient-to-r from-[#FFAE00]/10 to-orange-500/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                     
                     <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      {[...Array(3)].map((_, i) => (
-                        <span
-                          key={i}
-                          className="absolute w-1 h-1 bg-[#FFAE00] rounded-full opacity-70"
-                          style={{
-                            top: `${Math.random() * 60 + 20}%`,
-                            left: `${Math.random() * 80 + 10}%`,
-                            animation: `float 2s ease-in-out ${i * 0.3}s infinite`
-                          }}
-                        />
-                      ))}
+                      {[...Array(3)].map((_, i) => {
+                        const posIndex = (index * 3 + i) % FIXED_POSITIONS.length;
+                        return (
+                          <span
+                            key={i}
+                            className="absolute w-1 h-1 bg-[#FFAE00] rounded-full opacity-70"
+                            style={{
+                              top: FIXED_POSITIONS[posIndex].top,
+                              left: FIXED_POSITIONS[posIndex].left,
+                              animation: `float 2s ease-in-out ${i * 0.3}s infinite`
+                            }}
+                          />
+                        );
+                      })}
                     </span>
                   </button>
                 </div>
@@ -273,13 +329,13 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    {[...Array(5)].map((_, i) => (
+                    {SPARKLE_POSITIONS.map((position, i) => (
                       <div
                         key={i}
                         className="absolute w-1 h-1 bg-white rounded-full"
                         style={{
-                          top: `${Math.random() * 60 + 20}%`,
-                          left: `${Math.random() * 80 + 10}%`,
+                          top: position.top,
+                          left: position.left,
                           animation: `sparkle 1.5s ease-in-out ${i * 0.2}s infinite`
                         }}
                       />
