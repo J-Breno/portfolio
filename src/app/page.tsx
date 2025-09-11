@@ -6,12 +6,13 @@ import Header from "../../components/Header";
 import Projects from "../../components/projects";
 import Skills from "../../components/Skills";
 import { useEffect, useState } from "react";
-import { ChevronUpIcon } from "lucide-react";
+import { ChevronUpIcon, Code2, Cpu, Database, Zap } from "lucide-react";
 
 export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true); // Estado para controlar o tema
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // Estado para controlar o loading
 
   useEffect(() => {
     setIsClient(true);
@@ -30,12 +31,108 @@ export default function Home() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Simular tempo de carregamento (remova isso em produção)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  // Frases impactantes para desenvolvedores fullstack
+  const impactfulPhrases = [
+    "Transformando ideias em experiências digitais",
+    "Onde front-end e back-end se encontram em perfeita harmonia",
+    "Codificando soluções que conectam mundos",
+    "Desenvolvendo o amanhã, uma linha de código por vez",
+    "Da concepção à implantação: domínio completo do ciclo de desenvolvimento"
+  ];
+
+  // Selecionar uma frase aleatória
+  const randomPhrase = impactfulPhrases[Math.floor(Math.random() * impactfulPhrases.length)];
+
+  if (isLoading) {
+    return (
+      <div className={`fixed inset-0 flex items-center justify-center z-50 ${
+        isDarkMode 
+          ? 'bg-gradient-to-br from-gray-900 via-black to-gray-900' 
+          : 'bg-gradient-to-br from-blue-50 via-white to-gray-100'
+      }`}>
+        <div className="text-center">
+          {/* Logo animado */}
+          <div className="relative mb-8">
+            <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-r from-[#FFAE00] to-orange-500 flex items-center justify-center shadow-2xl">
+              <Code2 className="w-12 h-12 text-white" />
+            </div>
+            
+            {/* Elementos orbitais animados */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-[#FFAE00]/30 rounded-full animate-ping"></div>
+            
+            <Cpu className="absolute top-0 left-1/2 -ml-4 -mt-2 w-8 h-8 text-[#FFAE00] animate-orbit-slow" />
+            <Database className="absolute top-1/2 left-0 -mt-4 -ml-2 w-8 h-8 text-[#FFAE00] animate-orbit-medium" />
+            <Zap className="absolute top-1/2 right-0 -mt-4 -mr-2 w-8 h-8 text-[#FFAE00] animate-orbit-fast" />
+          </div>
+          
+          {/* Barra de progresso */}
+          <div className="w-64 h-2 mx-auto bg-gray-700/30 rounded-full overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-[#FFAE00] to-orange-500 rounded-full animate-progress"></div>
+          </div>
+          
+          {/* Frase impactante */}
+          <p className="mt-6 text-lg font-medium max-w-md mx-auto px-4">
+            <span className={`${isDarkMode ? 'text-[#FFAE00]' : 'text-orange-600'}`}>
+              {randomPhrase}
+            </span>
+          </p>
+          
+          {/* Texto de carregamento animado */}
+          <p className="mt-4 text-sm text-gray-500 animate-pulse">
+            Carregando experiências incríveis...
+          </p>
+        </div>
+
+        <style jsx>{`
+          @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+          }
+          .animate-progress {
+            animation: progress 3s ease-in-out forwards;
+          }
+          
+          @keyframes orbit-slow {
+            from { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+          }
+          @keyframes orbit-medium {
+            from { transform: rotate(0deg) translateX(30px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(30px) rotate(-360deg); }
+          }
+          @keyframes orbit-fast {
+            from { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
+          }
+          .animate-orbit-slow {
+            animation: orbit-slow 8s linear infinite;
+          }
+          .animate-orbit-medium {
+            animation: orbit-medium 6s linear infinite;
+          }
+          .animate-orbit-fast {
+            animation: orbit-fast 4s linear infinite;
+          }
+        `}</style>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -103,7 +200,7 @@ export default function Home() {
               © {new Date().getFullYear()} João Breno. Desenvolvido com TypeScript, Next.js e Tailwind CSS.
             </p>
             <p className={`text-xs mt-2 ${
-              isDarkMode ? 'text-gray-500' : 'text-gray-400'
+              isDarkMode ? 'text-gray-500' : 'text-gray-500'
             }`}>
               Todos os direitos reservados.
             </p>
