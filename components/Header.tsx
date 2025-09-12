@@ -54,7 +54,7 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
-      const sections = ["home", "serviços", "habilidades", "sobre", "projetos", "contato", "recomendações"];
+      const sections = ["home", "servicos", "habilidades", "sobre", "projetos", "contato", "recomendacoes"];
       const scrollPosition = window.scrollY + 100;
       
       for (const section of sections) {
@@ -158,12 +158,12 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
   };
 
   const navItems = [
-    { id: "serviços", label: "SERVIÇOS" },
+    { id: "servicos", label: "SERVIÇOS" },
     { id: "habilidades", label: "HABILIDADES" },
     { id: "sobre", label: "SOBRE" },
     { id: "projetos", label: "PROJETOS" },
     { id: "contato", label: "CONTATO" },
-    { id: "recomendações", label: "RECOMENDAÇÕES" }
+    { id: "recomendacoes", label: "RECOMENDAÇÕES" }
   ];
 
   const handleNavClick = (itemId: string) => {
@@ -369,7 +369,7 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden bg-gray-900/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-700/30 shadow-xl">
+          <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200/30 shadow-xl">
             <div className="container mx-auto px-4 py-4">
               <nav className="flex flex-col space-y-3">
                 {navItems.map((item) => (
@@ -379,7 +379,7 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
                     className={`text-left py-3 px-4 rounded-lg transition-all duration-300 relative overflow-hidden ${
                       activeSection === item.id
                         ? "text-[#FFAE00] bg-[#FFAE00]/10 font-semibold"
-                        : "text-white hover:text-[#FFAE00] hover:bg-gray-800/50"
+                        : "text-gray-800 hover:text-[#FFAE00] hover:bg-gray-100/50"
                     }`}
                   >
                     {item.label}

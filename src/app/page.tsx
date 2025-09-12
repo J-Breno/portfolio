@@ -7,21 +7,31 @@ import Projects from "../../components/projects";
 import Skills from "../../components/Skills";
 import { useEffect, useState } from "react";
 import { ChevronUpIcon, Code2, Cpu, Database, Zap } from "lucide-react";
+import Services from "../../components/Services";
+
+const impactfulPhrases = [
+  "Transformando ideias em experiências digitais",
+  "Onde front-end e back-end se encontram em perfeita harmonia",
+  "Codificando soluções que conectam mundos",
+  "Desenvolvendo o amanhã, uma linha de código por vez",
+  "Da concepção à implantação: domínio completo do ciclo de desenvolvimento"
+];
 
 export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [isLoading, setIsLoading] = useState(true); // Estado para controlar o loading
+  const [isLoading, setIsLoading] = useState(true);
+  const [randomPhrase, setRandomPhrase] = useState("");
 
   useEffect(() => {
     setIsClient(true);
     
-    // Verificar preferência salva no localStorage
+    setRandomPhrase(impactfulPhrases[Math.floor(Math.random() * impactfulPhrases.length)]);
+    
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    // Definir tema inicial
     const initialDarkMode = savedTheme ? savedTheme === 'dark' : prefersDark;
     setIsDarkMode(initialDarkMode);
     document.documentElement.classList.toggle('dark', initialDarkMode);
@@ -32,10 +42,9 @@ export default function Home() {
 
     window.addEventListener("scroll", handleScroll);
 
-    // Simular tempo de carregamento (remova isso em produção)
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 2000); 
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -47,18 +56,6 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Frases impactantes para desenvolvedores fullstack
-  const impactfulPhrases = [
-    "Transformando ideias em experiências digitais",
-    "Onde front-end e back-end se encontram em perfeita harmonia",
-    "Codificando soluções que conectam mundos",
-    "Desenvolvendo o amanhã, uma linha de código por vez",
-    "Da concepção à implantação: domínio completo do ciclo de desenvolvimento"
-  ];
-
-  // Selecionar uma frase aleatória
-  const randomPhrase = impactfulPhrases[Math.floor(Math.random() * impactfulPhrases.length)];
-
   if (isLoading) {
     return (
       <div className={`fixed inset-0 flex items-center justify-center z-50 ${
@@ -67,13 +64,11 @@ export default function Home() {
           : 'bg-gradient-to-br from-blue-50 via-white to-gray-100'
       }`}>
         <div className="text-center">
-          {/* Logo animado */}
           <div className="relative mb-8">
             <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-r from-[#FFAE00] to-orange-500 flex items-center justify-center shadow-2xl">
               <Code2 className="w-12 h-12 text-white" />
             </div>
             
-            {/* Elementos orbitais animados */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-[#FFAE00]/30 rounded-full animate-ping"></div>
             
             <Cpu className="absolute top-0 left-1/2 -ml-4 -mt-2 w-8 h-8 text-[#FFAE00] animate-orbit-slow" />
@@ -81,19 +76,16 @@ export default function Home() {
             <Zap className="absolute top-1/2 right-0 -mt-4 -mr-2 w-8 h-8 text-[#FFAE00] animate-orbit-fast" />
           </div>
           
-          {/* Barra de progresso */}
           <div className="w-64 h-2 mx-auto bg-gray-700/30 rounded-full overflow-hidden">
             <div className="h-full bg-gradient-to-r from-[#FFAE00] to-orange-500 rounded-full animate-progress"></div>
           </div>
           
-          {/* Frase impactante */}
           <p className="mt-6 text-lg font-medium max-w-md mx-auto px-4">
             <span className={`${isDarkMode ? 'text-[#FFAE00]' : 'text-orange-600'}`}>
-              {randomPhrase}
+              {randomPhrase || "Carregando experiências incríveis..."}
             </span>
           </p>
           
-          {/* Texto de carregamento animado */}
           <p className="mt-4 text-sm text-gray-500 animate-pulse">
             Carregando experiências incríveis...
           </p>
@@ -105,7 +97,7 @@ export default function Home() {
             100% { width: 100%; }
           }
           .animate-progress {
-            animation: progress 3s ease-in-out forwards;
+            animation: progress 2s ease-in-out forwards;
           }
           
           @keyframes orbit-slow {
@@ -136,9 +128,11 @@ export default function Home() {
 
   return (
     <>
-      <div className={`w-full min-h-screen ${isDarkMode 
-        ? 'bg-gradient-to-br from-gray-900 via-black to-gray-900' 
-        : 'bg-gradient-to-br from-blue-50 via-white to-gray-100'}`}>
+      <div className={`w-full min-h-screen transition-colors duration-500 ${
+        isDarkMode 
+          ? 'bg-gradient-to-br from-gray-900 via-black to-gray-900' 
+          : 'bg-gradient-to-br from-blue-50 via-white to-gray-100'
+      }`}>
         
         {isClient && (
           <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -172,9 +166,10 @@ export default function Home() {
           <Banner isDarkMode={isDarkMode} />
           
           <div className="space-y-0">
+            <Services isDarkMode={isDarkMode}  />
             <About isDarkMode={isDarkMode} />
             <Skills isDarkMode={isDarkMode} />
-            <Projects  isDarkMode={isDarkMode}/>
+            <Projects isDarkMode={isDarkMode} />
             <Contact isDarkMode={isDarkMode} />
           </div>
         </main>
@@ -190,7 +185,7 @@ export default function Home() {
           </button>
         )}
 
-        <footer className={`relative z-10 py-12 text-center backdrop-blur-md border-t mt-20 ${
+        <footer className={`relative z-10 py-12 text-center backdrop-blur-md border-t mt-20 transition-colors duration-500 ${
           isDarkMode 
             ? 'text-gray-400 bg-gray-900/80 border-gray-700/30' 
             : 'text-gray-600 bg-white/80 border-gray-300/50'

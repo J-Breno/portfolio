@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog,  DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ExternalLinkIcon, GithubIcon, XIcon, ArrowRightIcon, FilterIcon } from "lucide-react";
 
 interface Project {
@@ -90,7 +90,6 @@ export default function Projects({ isDarkMode }: ProjectsProps) {
           : 'bg-gradient-to-br from-blue-50 via-gray-50 to-gray-100'
       }`}
     >
-      {/* Elementos de fundo decorativos */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className={`absolute -top-20 -right-20 w-80 h-80 rounded-full ${
           isDarkMode ? 'bg-[#FFAE00]/10' : 'bg-[#FFAE00]/5'
@@ -99,7 +98,6 @@ export default function Projects({ isDarkMode }: ProjectsProps) {
           isDarkMode ? 'bg-orange-500/10' : 'bg-orange-500/5'
         } blur-3xl`}></div>
         
-        {/* Grid pattern sutil */}
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: `linear-gradient(${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'} 1px, transparent 1px), linear-gradient(90deg, ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'} 1px, transparent 1px)`,
           backgroundSize: '50px 50px',
@@ -181,7 +179,6 @@ export default function Projects({ isDarkMode }: ProjectsProps) {
 
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#FFAE00]/10 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
                 
-                {/* Overlay de hover */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="bg-black/40 rounded-full p-3 transform scale-0 group-hover:scale-100 transition-transform duration-500">
                     <ArrowRightIcon className="w-6 h-6 text-[#FFAE00]" />
@@ -271,7 +268,6 @@ export default function Projects({ isDarkMode }: ProjectsProps) {
         </div>
       </div>
 
-      {/* Modal com design aprimorado */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent 
           className={`max-w-[95vw] md:max-w-3xl lg:max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl p-0 border-0 ${
@@ -313,7 +309,6 @@ export default function Projects({ isDarkMode }: ProjectsProps) {
 
           {selectedProject && (
             <div className="flex flex-col lg:flex-row">
-              {/* Imagem do projeto - Agora com tamanho responsivo */}
               <div className="lg:w-1/2 p-4 md:p-6">
                 <div className="relative rounded-xl overflow-hidden group">
                   <div className="aspect-video w-full overflow-hidden">
@@ -337,7 +332,6 @@ export default function Projects({ isDarkMode }: ProjectsProps) {
                 </div>
               </div>
               
-              {/* Conteúdo do projeto */}
               <div className="lg:w-1/2 p-4 md:p-6">
                 <div className="mb-4 md:mb-6">
                   <h4 className={`text-lg font-semibold mb-2 md:mb-3 flex items-center gap-2 ${

@@ -212,7 +212,7 @@ export function About({ isDarkMode }: AboutProps) {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
           {[
-            { number: "2+", label: "Anos de Experiência", delay: 100 },
+            { number: "3+", label: "Anos de Experiência", delay: 100 },
             { number: "15+", label: "Projetos Concluídos", delay: 200 },
             { number: "8+", label: "Tecnologias Dominadas", delay: 300 },
             { number: "100%", label: "Comprometimento", delay: 400 }

@@ -12,7 +12,7 @@ import {
 } from "@phosphor-icons/react";
 import { FaDocker, FaLaravel, FaPhp, FaReact, FaWordpress, FaGitAlt  } from "react-icons/fa";
 import {TbBrandTypescript} from "react-icons/tb";
-import {  SiJquery, SiPostgresql } from "react-icons/si";
+import {  SiJquery, SiMysql } from "react-icons/si";
 import { RiTailwindCssFill, RiJavascriptLine  } from "react-icons/ri";
 import { GiTestTubes } from "react-icons/gi";
 
@@ -150,10 +150,10 @@ export default function Skills({ isDarkMode }: SkillsProps) {
       tags: ["tools"]
     },
     { 
-      name: "PostgreSQL", 
-      icon: SiPostgresql, 
-      color: "#336791", 
-      bgColor: "bg-gradient-to-br from-[#336791]/20 to-[#2a5476]/10",
+      name: "MySql", 
+      icon: SiMysql, 
+      color: "#cf9312", 
+      bgColor: "bg-gradient-to-br from-[#cf9312]/20 to-[#FFAE00]/10",
       description: "Sistema de gerenciamento de banco de dados relacional de código aberto",
       tags: ["backend", "tools"]
     },
@@ -173,7 +173,6 @@ export default function Skills({ isDarkMode }: SkillsProps) {
 
   const displayedSkills = showAllSkills ? filteredSkills : filteredSkills.slice(0, 8);
 
-  // Só renderiza o conteúdo após o mount para evitar hydration mismatch
   if (!isMounted) {
     return (
       <section 
