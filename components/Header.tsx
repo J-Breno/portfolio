@@ -6,7 +6,6 @@ interface HeaderProps {
   setIsDarkMode: (isDarkMode: boolean) => void;
 }
 
-// Posições pré-definidas para evitar mismatch de hidratação
 const FIXED_POSITIONS = [
   { top: "67.06%", left: "53.82%" },
   { top: "70.99%", left: "21.60%" },
@@ -54,7 +53,7 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
-      const sections = ["home", "servicos", "habilidades", "sobre", "projetos", "contato", "recomendacoes"];
+      const sections = ["home", "servicos", "recomendacoes" ,"habilidades", "projetos", "sobre", "contato", ];
       const scrollPosition = window.scrollY + 100;
       
       for (const section of sections) {
@@ -159,11 +158,11 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
 
   const navItems = [
     { id: "servicos", label: "SERVIÇOS" },
+    { id: "recomendacoes", label: "RECOMENDAÇÕES" },
     { id: "habilidades", label: "HABILIDADES" },
-    { id: "sobre", label: "SOBRE" },
     { id: "projetos", label: "PROJETOS" },
+    { id: "sobre", label: "SOBRE" },
     { id: "contato", label: "CONTATO" },
-    { id: "recomendacoes", label: "RECOMENDAÇÕES" }
   ];
 
   const handleNavClick = (itemId: string) => {

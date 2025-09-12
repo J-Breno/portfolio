@@ -1,4 +1,3 @@
-// layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
@@ -11,6 +10,9 @@ export const metadata: Metadata = {
   keywords: "desenvolvedor, full stack, react, next.js, typescript, portfolio",
   authors: [{ name: "João Breno" }],
   viewport: "width=device-width, initial-scale=1",
+  icons: {
+    icon: "/img/logo.png",
+  }
 };
 
 export default function RootLayout({

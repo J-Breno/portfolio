@@ -8,6 +8,7 @@ import Skills from "../../components/Skills";
 import { useEffect, useState } from "react";
 import { ChevronUpIcon, Code2, Cpu, Database, Zap } from "lucide-react";
 import Services from "../../components/Services";
+import Recommendations from "../../components/Recommendations";
 
 const impactfulPhrases = [
   "Transformando ideias em experiências digitais",
@@ -167,9 +168,10 @@ export default function Home() {
           
           <div className="space-y-0">
             <Services isDarkMode={isDarkMode}  />
-            <About isDarkMode={isDarkMode} />
+            <Recommendations isDarkMode={isDarkMode} />
             <Skills isDarkMode={isDarkMode} />
             <Projects isDarkMode={isDarkMode} />
+            <About isDarkMode={isDarkMode} />
             <Contact isDarkMode={isDarkMode} />
           </div>
         </main>

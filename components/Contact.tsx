@@ -65,7 +65,6 @@ export default function Contact({ isDarkMode }: ContactProps) {
         : 'bg-gradient-to-br from-blue-50 via-gray-50 to-gray-100'
       }`}
     >
-      {/* Elementos decorativos de fundo */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10">
         <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl ${
           isDarkMode ? 'bg-[#FFAE00]/20' : 'bg-[#FFAE00]/10'
@@ -93,7 +92,6 @@ export default function Contact({ isDarkMode }: ContactProps) {
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-          {/* Informações de contato - Ocupa 2 colunas em desktop */}
           <div className="lg:col-span-2 space-y-8">
             <div className={`p-8 rounded-2xl backdrop-blur-sm border ${
               isDarkMode 
@@ -230,7 +228,6 @@ export default function Contact({ isDarkMode }: ContactProps) {
             </div>
           </div>
 
-          {/* Formulário - Ocupa 3 colunas em desktop */}
           <div className="lg:col-span-3 relative">
             <div className={`absolute -inset-4 rounded-2xl blur-xl opacity-30 ${
               isDarkMode 

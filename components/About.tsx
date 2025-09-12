@@ -50,9 +50,9 @@ export function About({ isDarkMode }: AboutProps) {
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="flex justify-center mb-16 observe">
           <div className="relative">
-            <h2 className={`text-5xl md:text-6xl font-bold text-center relative z-10 opacity-0 translate-y-10 transition-all duration-700 ${
+            <h2 className={`text-5xl md:text-6xl observe font-bold text-center relative z-10 opacity-0 translate-y-10 transition-all duration-700 ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-              Sobre <span className="text-[#FFAE00]">mim</span>
+              Mas afinal, quem é <span className="text-[#FFAE00]">Breno</span>?
             </h2>
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-[#FFAE00] to-orange-500 rounded-full observe opacity-0 scale-0 transition-all duration-700 delay-300 origin-center"></div>
             <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-28 h-1 bg-[#FFAE00]/20 blur-sm observe opacity-0 scale-0 transition-all duration-700 delay-500 origin-center"></div>
