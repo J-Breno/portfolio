@@ -189,6 +189,23 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
     }
   };
 
+  // Função para determinar a cor de fundo do header no mobile
+  const getMobileHeaderBgClass = () => {
+    if (isMenuOpen) {
+      return isDarkMode 
+        ? "bg-gray-900/95 backdrop-blur-md border-b border-gray-700/30" 
+        : "bg-white/95 backdrop-blur-md border-b border-gray-200/30";
+    }
+    
+    if (isScrolled) {
+      return isDarkMode 
+        ? "bg-gray-900/95 backdrop-blur-md border-b border-gray-700/30" 
+        : "bg-white/95 backdrop-blur-md border-b border-gray-200/30";
+    }
+    
+    return "bg-transparent";
+  };
+
   if (!mounted) {
     return (
       <header className="fixed top-0 left-0 right-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/30 dark:border-gray-700/30 shadow-2xl py-1">
@@ -347,7 +364,7 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
             <div className="flex items-center gap-3 md:hidden">
               <button
                 onClick={toggleDarkMode}
-                className={`p-2 rounded-lg ${isScrolled ? (isDarkMode ? "bg-gray-800 text-gray-300" : "bg-gray-200/80 text-gray-700") : "bg-gray-800/50 text-white"} hover:text-[#FFAE00] transition-all duration-300`}
+                className={`p-2 rounded-lg ${isScrolled ? (isDarkMode ? "bg-gray-800 text-gray-300" : "bg-gray-200/80 text-gray-700") : (isDarkMode ? "bg-gray-800/50 text-white" : "bg-gray-800/50 text-white")} hover:text-[#FFAE00] transition-all duration-300`}
                 aria-label="Alternar tema"
               >
                 {isDarkMode ? (
@@ -359,7 +376,7 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
 
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`p-2 ${getTextColorClass()} hover:text-[#FFAE00] transition-colors duration-300 rounded-lg hover:bg-gray-800/50 dark:hover:bg-gray-800`}
+                className={`p-2 ${getTextColorClass()} hover:text-[#FFAE00] transition-colors duration-300 rounded-lg ${isDarkMode ? "hover:bg-gray-800/50" : "hover:bg-gray-800/10"}`}
               >
                 {isMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
               </button>
@@ -368,7 +385,7 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200/30 shadow-xl">
+          <div className={`md:hidden backdrop-blur-md border-t shadow-xl ${isDarkMode ? "bg-gray-900/95 border-gray-700/30" : "bg-white/95 border-gray-200/30"}`}>
             <div className="container mx-auto px-4 py-4">
               <nav className="flex flex-col space-y-3">
                 {navItems.map((item) => (
@@ -378,7 +395,9 @@ export default function Header({ isDarkMode, setIsDarkMode }: HeaderProps) {
                     className={`text-left py-3 px-4 rounded-lg transition-all duration-300 relative overflow-hidden ${
                       activeSection === item.id
                         ? "text-[#FFAE00] bg-[#FFAE00]/10 font-semibold"
-                        : "text-gray-800 hover:text-[#FFAE00] hover:bg-gray-100/50"
+                        : (isDarkMode 
+                            ? "text-gray-300 hover:text-[#FFAE00] hover:bg-gray-800/50" 
+                            : "text-gray-800 hover:text-[#FFAE00] hover:bg-gray-100/50")
                     }`}
                   >
                     {item.label}
