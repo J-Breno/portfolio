@@ -259,7 +259,7 @@ export default function Projects({ isDarkMode }: ProjectsProps) {
             Gostou do que viu? Vamos trabalhar juntos!
           </p>
           <a
-            href="#contact"
+            href="#contato"
             className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#FFAE00] to-orange-500 hover:from-orange-500 hover:to-[#FFAE00] text-black font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
           >
             Entrar em Contato

@@ -146,7 +146,7 @@ export default function Services({ isDarkMode }: ServicesProps) {
             onClick={scrollToContact}
             className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#FFAE00] to-orange-500 hover:from-orange-500 hover:to-[#FFAE00] text-black font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg mb-12"
           >
-            Entrar em Contato Agora
+            <a href="#contato">Entrar em Contato Agora</a>
             <ArrowRightIcon className="w-4 h-4" />
           </button>
           
