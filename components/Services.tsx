@@ -223,13 +223,13 @@ export default function Services({ isDarkMode }: ServicesProps) {
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent 
-          className={`max-w-[95vw] md:max-w-3xl lg:max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl p-0 border-0 ${
+          className={`max-w-[99vw] md:max-w-3xl lg:max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl p-0 border-0 ${
             isDarkMode 
               ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white' 
               : 'bg-gradient-to-br from-white to-gray-100 text-gray-800'
           }`}
         >
-          <DialogHeader className="sticky top-0 z-10 flex flex-row items-center justify-between p-4 md:p-6 border-b backdrop-blur-md"
+          <DialogHeader className="sticky top-0 z-10 flex flex-row items-center justify-between p-2 md:p-6 border-b backdrop-blur-md"
             style={{
               background: isDarkMode 
                 ? 'linear-gradient(to right, rgba(17, 24, 39, 0.95), rgba(31, 41, 55, 0.95))'
@@ -237,7 +237,7 @@ export default function Services({ isDarkMode }: ServicesProps) {
               borderColor: isDarkMode ? 'rgba(255, 174, 0, 0.2)' : 'rgba(255, 174, 0, 0.3)'
             }}
           >
-            <div className="flex items-center gap-4 min-w-0">
+            <div className="flex items-center gap-1 min-w-0">
               {selectedService && (
                 <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${selectedService.gradient} text-white`}>
                   {selectedService.icon}

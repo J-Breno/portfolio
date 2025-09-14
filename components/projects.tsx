@@ -31,7 +31,7 @@ export default function Projects({ isDarkMode }: ProjectsProps) {
       title: "Devsbook",
       image: "/img/devsbook.png",
       description: "Rede social completa desenvolvida com PHP e MySQL. Possui sistema de autenticação, CRUD completo, upload de imagens, configurações de usuário, comentários e likes em posts.",
-      technologies: ["HTML/CSS", "JavaScript", "PHP", "MySQL"],
+      technologies: ["TailwindCss", "JavaScript", "PHP", "HTML/CSS","MySQL"],
       githubUrl: "https://github.com/J-Breno/php_curso/tree/main/projeto/devsbook",
       liveUrl: "https://jbrenojdev.com.br/app/public/login.php",
       bgPosition: "center",
